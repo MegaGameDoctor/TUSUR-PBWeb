@@ -7,6 +7,12 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <nav class="top-menu">
+        <ul>
+            <li><font color="#ff9800">Главная</font></li>
+            <li><a href="chat.php">Чат</a></li>
+        </ul>
+    </nav>
     <h1>Полотно</h1>
     <img src="https://pbtusur.ru/PBP/api/getCanvasImage.php" draggable="false">
     <h1>Таблица лидеров</h1>

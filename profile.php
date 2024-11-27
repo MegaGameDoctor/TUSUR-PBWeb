@@ -7,6 +7,12 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <nav class="top-menu">
+        <ul>
+            <li><a href="index.php">Главная</a></li>
+            <li><a href="chat.php">Чат</a></li>
+        </ul>
+    </nav>
 <?php
 include "connect.php";
 if(isset($_GET['player'])) $player = $_GET['player'];
