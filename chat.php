@@ -33,7 +33,7 @@ while ($top = mysqli_fetch_array($result)) {
 $date = date('d-m-Y (H:i:s)', $top['date'] / 1000);
 echo <<<HTML
             <tr>
-                <td>{$top['player']}</td>
+                <td><a href="profile.php?player={$top['player']}">{$top['player']}</a></td>
                 <td>{$top['message']}</td>
                 <td>{$date}</td>
             </tr>
