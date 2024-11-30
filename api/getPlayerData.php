@@ -6,14 +6,19 @@ if(!isset($_GET['player']) || !isset($_GET['parameter'])) {
 $player = $_GET['player'];
 $parameter = $_GET['parameter'];
 
-if($parameter != "painted") {
+if($parameter != "painted" && $parameter != "nextPixel") {
     die("Недопустимый параметр");
 }
 
-$playerData = mysqli_query($db, "SELECT * FROM app_players") or die("Не удалось получить данные об игроке");
+$stmt = $db->prepare("SELECT * FROM app_players WHERE player=?");
+$stmt->bind_param("s", $player);
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
 
-if($top = mysqli_fetch_array($playerData)) {
-    die($top[$parameter]);
+if($top = mysqli_fetch_array($result)) {
+    echo $top[$parameter];
+} else {
+    die("NO_DATA");
 }
 
 ?>

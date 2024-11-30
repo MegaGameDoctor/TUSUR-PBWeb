@@ -36,6 +36,8 @@ return "<font color='fuchsia'>Пурпурный</font>";
 return "<font color='purple'>Фиолетовый</font>";
 } else if($color == -153674) {
 return "<font color='pink'>Розовый</font>";
+} else {
+return "NONE";
 }
 }
 ?>

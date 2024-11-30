@@ -16,9 +16,12 @@
 <?php
 include "connect.php";
 if(isset($_GET['player'])) $player = $_GET['player'];
-$userData = mysqli_query($db, "SELECT * FROM app_players WHERE player='" . $player . "'") or die("Не удалось обработать запрос");
+$stmt = $db->prepare("SELECT * FROM app_players WHERE player = ?");
+$stmt->bind_param("s", $player);
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
 
-if($top = mysqli_fetch_array($userData)) {
+if($top = mysqli_fetch_array($result)) {
 $player = $top['player'];
 $painted = $top['painted'];
 echo <<<HTML
@@ -42,9 +45,12 @@ die();
         </thead>
         <tbody>
 <?php
-$topData = mysqli_query($db, "SELECT * FROM app_pixel_logs WHERE player='" . $player . "' ORDER BY time DESC LIMIT 100") or die("Не удалось загрузить данные о закрашиваниях");
+$stmt = $db->prepare("SELECT * FROM app_pixel_logs WHERE player = ? ORDER BY time DESC LIMIT 100");
+$stmt->bind_param("s", $player);
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
 
-while ($top = mysqli_fetch_array($topData)) {
+while ($top = mysqli_fetch_array($result)) {
 $colorStr = colorToName($top['newColor']);
 $date = date('d-m-Y (H:i:s)', $top['time'] / 1000);
 echo <<<HTML

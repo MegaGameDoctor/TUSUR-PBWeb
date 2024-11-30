@@ -25,9 +25,11 @@
         <tbody>
 <?php
 include "connect.php";
-$topData = mysqli_query($db, "SELECT * FROM app_chat_logs ORDER BY id DESC LIMIT 100") or die("Не удалось обработать запрос");
+$stmt = $db->prepare("SELECT * FROM app_chat_logs ORDER BY id DESC LIMIT 100");
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
 
-while ($top = mysqli_fetch_array($topData)) {
+while ($top = mysqli_fetch_array($result)) {
 $date = date('d-m-Y (H:i:s)', $top['date'] / 1000);
 echo <<<HTML
             <tr>

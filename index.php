@@ -27,9 +27,12 @@
         <tbody>
 <?php
 include "connect.php";
-$topData = mysqli_query($db, "SELECT * FROM app_players ORDER BY painted DESC LIMIT 3") or die("Не удалось загрузить данные о игроках");
+$stmt = $db->prepare("SELECT * FROM app_players ORDER BY painted DESC LIMIT 3");
+//$stmt->bind_param("ss", $email, $password_hash);
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
 $pose = 1;
-while ($top = mysqli_fetch_array($topData)) {
+while ($top = mysqli_fetch_array($result)) {
 echo <<<HTML
             <tr>
                 <td>{$pose}</td>

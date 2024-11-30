@@ -1,8 +1,11 @@
 <?php
 include "../connect.php";
 
-$canvasCount = mysqli_query($db, "SELECT COUNT(*) FROM app_canvas_state") or die("Не удалось получить данные о поле"); 
-if($top = mysqli_fetch_array($canvasCount)) {
+$stmt = $db->prepare("SELECT COUNT(*) FROM app_canvas_state");
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
+
+if($top = mysqli_fetch_array($result)) {
 $x = sqrt($top['COUNT(*)']);
 $y = $x;
 } else {
@@ -11,7 +14,9 @@ die("Внутренняя ошибка");
 
 $gd = imagecreatetruecolor($x, $y);
 
-$result = mysqli_query($db, "SELECT * FROM app_canvas_state") or die("Не удалось получить данные о поле"); 
+$stmt = $db->prepare("SELECT * FROM app_canvas_state");
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
 
 while ($top = mysqli_fetch_array($result)) {
 if($top['color'] == -16777216) {
