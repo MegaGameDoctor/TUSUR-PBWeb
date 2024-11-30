@@ -1,10 +1,10 @@
 <?php
 
 # Подключение к базе данных
-$host = "kosfaton.beget.tech";
-$dbuser = "kosfaton_pbtets";
-$dbpass = "JbGTqgys9*ed";
-$dbname = "kosfaton_pbtets";
+$host = "-";
+$dbuser = "-";
+$dbpass = "-";
+$dbname = "-";
 
 # Прочее
 function colorToName($color) {
