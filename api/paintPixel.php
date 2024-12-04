@@ -1,9 +1,10 @@
 <?php
 include "../connect.php";
-if(!isset($_GET['player']) || !isset($_GET['color']) || !isset($_GET['x']) || !isset($_GET['y'])) {
+if(!isset($_GET['player']) || !isset($_GET['hashedPassword']) || !isset($_GET['color']) || !isset($_GET['x']) || !isset($_GET['y'])) {
     die("no data");
 }
 $player = $_GET['player'];
+$hashedPassword = $_GET['hashedPassword'];
 $color = $_GET['color'];
 $x = $_GET['x'];
 $y = $_GET['y'];
@@ -14,8 +15,8 @@ $stmt->execute() or die("Не удалось обработать запрос")
 $result = $stmt->get_result();
 
 if($not_using = mysqli_fetch_array($result)) {
-$stmt = $db->prepare("SELECT * FROM app_players WHERE player = ?");
-$stmt->bind_param("s", $player);
+$stmt = $db->prepare("SELECT * FROM app_players WHERE player = ? AND password = ?");
+$stmt->bind_param("ss", $player, $hashedPassword);
 $stmt->execute() or die("Не удалось обработать запрос");
 $result = $stmt->get_result();
 
@@ -27,7 +28,7 @@ if($top = mysqli_fetch_array($result)) {
         echo "NO_COLOR";
     } else {
         $stmt = $db->prepare("INSERT INTO core_requests (`action`, `data`, `status`) VALUES ('paintPixel', ?, 'WAITING')");
-        $data = $player . "@!@" . $x . "@!@" . $y . "@!@" . $color;
+        $data = $player . "@!@" . $hashedPassword . "@!@" . $x . "@!@" . $y . "@!@" . $color;
         $stmt->bind_param("s", $data);
         
         $stmt->execute() or die("Не удалось обработать запрос");
