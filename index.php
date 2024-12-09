@@ -16,6 +16,17 @@
     <h1>Полотно</h1>
     <img src="https://pbtusur.ru/PBP/api/getCanvasImage.php" draggable="false">
     <h1>Таблица лидеров</h1>
+<?php
+include "connect.php";
+$stmt = $db->prepare("SELECT COUNT(*) FROM app_players");
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
+if ($top = mysqli_fetch_array($result)) {
+echo <<<HTML
+<h3>(Первые 10, Всего {$top['COUNT(*)']})</h3>
+HTML;
+}
+?>
     <table>
         <thead>
             <tr>
@@ -26,9 +37,7 @@
         </thead>
         <tbody>
 <?php
-include "connect.php";
-$stmt = $db->prepare("SELECT * FROM app_players ORDER BY painted DESC LIMIT 3");
-//$stmt->bind_param("ss", $email, $password_hash);
+$stmt = $db->prepare("SELECT * FROM app_players ORDER BY painted DESC LIMIT 10");
 $stmt->execute() or die("Не удалось обработать запрос");
 $result = $stmt->get_result();
 $pose = 1;
