@@ -13,7 +13,19 @@
             <li><font color="#ff9800">Чат</font></li>
         </ul>
     </nav>
-<h3>Сообщения чата (Последние 100)</h3>
+<h2>Сообщения чата</h2>
+<?php
+include "connect.php";
+$stmt = $db->prepare("SELECT COUNT(*) FROM app_chat_logs");
+$stmt->execute() or die("Не удалось обработать запрос");
+$result = $stmt->get_result();
+
+if ($top = mysqli_fetch_array($result)) {
+echo <<<HTML
+<h3>(Последние 100, Всего: {$top['COUNT(*)']})</h3>
+HTML;
+}
+?>
     <table>
         <thead>
             <tr>
@@ -24,7 +36,6 @@
         </thead>
         <tbody>
 <?php
-include "connect.php";
 $stmt = $db->prepare("SELECT * FROM app_chat_logs ORDER BY id DESC LIMIT 100");
 $stmt->execute() or die("Не удалось обработать запрос");
 $result = $stmt->get_result();
