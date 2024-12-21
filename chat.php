@@ -11,6 +11,7 @@
         <ul>
             <li><a href="index.php">Главная</a></li>
             <li><font color="#ff9800">Чат</font></li>
+            <li><a href="paints.php">Закрашивания</a></li>
         </ul>
     </nav>
 <h2>Сообщения чата</h2>
