@@ -12,6 +12,7 @@
             <li><font color="#ff9800">Главная</font></li>
             <li><a href="chat.php">Чат</a></li>
             <li><a href="paints.php">Закрашивания</a></li>
+            <li><a href="download.php">Скачать</a></li>
         </ul>
     </nav>
     <h1>Полотно</h1>

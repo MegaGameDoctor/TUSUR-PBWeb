@@ -14,7 +14,10 @@ $stmt->bind_param("ii", $x, $y);
 $stmt->execute() or die("Не удалось обработать запрос");
 $result = $stmt->get_result();
 
-if($not_using = mysqli_fetch_array($result)) {
+if($oldPixelData = mysqli_fetch_array($result)) {
+if($oldPixelData['color'] == $color) {
+    echo "SAME_PIXEL";
+} else {
 $stmt = $db->prepare("SELECT * FROM app_players WHERE player = ? AND password = ?");
 $stmt->bind_param("ss", $player, $hashedPassword);
 $stmt->execute() or die("Не удалось обработать запрос");
@@ -36,6 +39,7 @@ if($top = mysqli_fetch_array($result)) {
     }
 } else {
     echo "NO_PLAYER";
+}
 }
 } else {
     echo "INCORRECT_COORDS";

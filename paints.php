@@ -12,6 +12,7 @@
             <li><a href="index.php">Главная</a></li>
             <li><a href="chat.php">Чат</a></li>
             <li><font color="#ff9800">Закрашивания</font></li>
+            <li><a href="download.php">Скачать</a></li>
         </ul>
     </nav>
 <h2>История закрашиваний</h2>
