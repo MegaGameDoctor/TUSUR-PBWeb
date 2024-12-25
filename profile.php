@@ -12,6 +12,7 @@
             <li><a href="index.php">Главная</a></li>
             <li><a href="chat.php">Чат</a></li>
             <li><a href="paints.php">Закрашивания</a></li>
+            <li><a href="download.php">Скачать</a></li>
         </ul>
     </nav>
 <?php
